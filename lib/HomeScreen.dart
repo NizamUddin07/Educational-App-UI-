@@ -28,6 +28,13 @@ class HomeScreen extends StatelessWidget {
     Icon(Icons.emoji_events, color: Colors.white, size: 30),
   ];
 
+  List imgList = [
+    'Flutter',
+    'React Native',
+    'Python',
+    'C#',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,12 +120,65 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 8), // Optional spacing
-                      Text(catNames[index], style: TextStyle(color: Colors.black.withOpacity(0.6), fontWeight: FontWeight.w500, fontSize: 14
-                        , )),
+                      Text(catNames[index], style: TextStyle(color: Colors.black.withOpacity(0.6), fontWeight: FontWeight.w500, fontSize: 14)),
                     ],
                   );
                 },
               ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20, left: 15, right: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("See All", style: TextStyle(
+                    fontSize: 23,
+                    fontWeight: FontWeight.w600
+                )),
+                Text("See More", style: TextStyle(
+                  fontSize: 18,
+                  color: Color(0xFF674AEF),
+                )),
+              ],
+            ),
+          ),
+          SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: GridView.builder(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: (MediaQuery.of(context).size.height - 50 - 25) / (4 * 240),
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+              itemCount: imgList.length, // Add the item count
+              itemBuilder: (context, index) {
+                return InkWell(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Color(0xFFF5F3FF),
+                    ),
+                    child: Column(
+                      children: [
+                        Padding(padding: EdgeInsets.all(10),
+                        child: Image.asset("assets/images/${imgList[index]}.png",
+                        width: 100,
+                          height: 100,
+                        )
+                          
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ),
         ],
