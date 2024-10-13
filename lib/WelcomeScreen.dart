@@ -12,13 +12,6 @@ class WelcomeScreen extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
-            // Container(
-            //   height: MediaQuery.of(context).size.height/1.6,
-            //   width: MediaQuery.of(context).size.width,
-            //   decoration: BoxDecoration(
-            //       color: Colors.green
-            //   ),
-            // ),
             Container(
               height: MediaQuery.of(context).size.height/1.6,
               width: MediaQuery.of(context).size.width,
