@@ -1,3 +1,4 @@
+import 'package:basic_package/course_screen.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -158,7 +159,9 @@ class HomeScreen extends StatelessWidget {
               itemCount: imgList.length, // Add the item count
               itemBuilder: (context, index) {
                 return InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) =>CourseScreen(imgList[index])));
+                  },
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
                     decoration: BoxDecoration(
@@ -172,8 +175,13 @@ class HomeScreen extends StatelessWidget {
                         width: 100,
                           height: 100,
                         )
-                          
-                        )
+                        ),
+                        SizedBox(height: 10,),
+                        Text(
+                            imgList[index], style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                        ),
+                        SizedBox(height: 10,),
+                        Text("55 Videos", style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15, color: Colors.black.withOpacity(0.5)),)
                       ],
                     ),
                   ),
@@ -181,6 +189,20 @@ class HomeScreen extends StatelessWidget {
               },
             ),
           ),
+        ],
+      ),
+
+      bottomNavigationBar: BottomNavigationBar(
+        iconSize: 32,
+        selectedItemColor: Color(0xFF674AEF),
+        selectedFontSize: 18,
+         unselectedItemColor: Colors.grey,
+        items: [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+            BottomNavigationBarItem(icon: Icon(Icons.assignment), label: 'Course'),
+            BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Wishlist'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
+
         ],
       ),
     );
