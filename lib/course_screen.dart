@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CourseScreen extends StatefulWidget {
-  String img;
+  final String img;
   CourseScreen(this.img);
 
   @override
@@ -9,6 +9,8 @@ class CourseScreen extends StatefulWidget {
 }
 
 class _CourseScreenState extends State<CourseScreen> {
+  bool isVideoSection = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,12 +19,19 @@ class _CourseScreenState extends State<CourseScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-        title: Text(widget.img, style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
+        title: Text(
+          widget.img,
+          style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1),
         ),
         actions: [
-          Padding(padding: EdgeInsets.only(right: 10),
-          child: Icon(Icons.notifications, size: 28, color: Color(0xFF674AEF),),
-          )
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Icon(
+              Icons.notifications,
+              size: 28,
+              color: Color(0xFF674AEF),
+            ),
+          ),
         ],
       ),
       body: Padding(
@@ -36,14 +45,17 @@ class _CourseScreenState extends State<CourseScreen> {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Color(0xFFF5F3FF),
-                image: DecorationImage(image: AssetImage("assets/images/${widget.img}.png")),
+                image: DecorationImage(
+                  image: AssetImage("assets/images/${widget.img}.png"),
+                  fit: BoxFit.cover,
+                ),
               ),
               child: Center(
                 child: Container(
                   padding: EdgeInsets.all(5),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    shape: BoxShape.circle
+                    shape: BoxShape.circle,
                   ),
                   child: Icon(
                     Icons.play_arrow_rounded,
@@ -54,51 +66,92 @@ class _CourseScreenState extends State<CourseScreen> {
               ),
             ),
             SizedBox(height: 15),
-            Text("${widget.img} Complete Course ", style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.black.withOpacity(0.7)
+            Text(
+              "${widget.img} Complete Course ",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500, color: Colors.black.withOpacity(0.7)),
             ),
+            SizedBox(height: 5),
+            Text(
+              "Created By Nizam Uddin",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black.withOpacity(0.7)),
             ),
-            SizedBox(height: 5,),
-            Text(" Created By Nizam Uddin ", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.black.withOpacity(0.7)
+            SizedBox(height: 5),
+            Text(
+              "55 Videos",
+              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black.withOpacity(0.7)),
             ),
-            ),
-            SizedBox(height: 5,),
-            Text("55 Videos ", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black.withOpacity(0.7)
-            ),
-            ),
-            SizedBox(height: 20,),
+            SizedBox(height: 20),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               decoration: BoxDecoration(
                 color: Color(0xFFF5F3FF),
-                borderRadius: BorderRadius.circular(10)
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Material(
-                    color: Color(0xFF674AEF),
+                    color: isVideoSection ? Color(0xFF674AEF) : Color(0xFF674AEF).withOpacity(0.5),
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
-                      onTap: (){},
+                      onTap: () {
+                        setState(() {
+                          isVideoSection = true;
+                        });
+                      },
                       child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 35, vertical: 15),
                         child: Text(
-                          "Videos", style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500
+                          "Videos",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                        ),
+                      ),
                     ),
                   ),
+                  Material(
+                    color: !isVideoSection ? Color(0xFF674AEF) : Color(0xFF674AEF).withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(10),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          isVideoSection = false;
+                        });
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 35, vertical: 15),
+                        child: Text(
+                          "Description",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
-            )
+            ),
+            SizedBox(height: 20),
+            // Displaying content based on the selected section
+            if (isVideoSection)
+              Container(
+                padding: EdgeInsets.all(20),
+                child: Text("Video content goes here", style: TextStyle(fontSize: 18)),
+              )
+            else
+              Container(
+                padding: EdgeInsets.all(20),
+                child: Text("Description content goes here", style: TextStyle(fontSize: 18)),
+              ),
           ],
         ),
       ),
     );
   }
 }
-
